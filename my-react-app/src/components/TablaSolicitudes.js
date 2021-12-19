@@ -1,4 +1,35 @@
-function tablaSolicitudes(){
+import React from 'react';
+import * as ReactBootStrap from "react-bootstrap";
+
+
+const tablaSolicitudes = () =>{
+    const empleado = [
+        {ID: 0, nombre: "Ramón", apellido: "Pérez", fecha: "23/12/2022", tipo: "Vacaciones", status: "Deseased"},
+        {ID: 1, nombre: "Jorge", apellido: "JAJAJA", fecha: "11/10/1913", tipo: "Permiso", status: "Alive"},
+        {ID: 2, nombre: "Juan", apellido: "Asasa", fecha: "13/11/2002", tipo: "Permiso", status: "Alive"}
+        ]
+    function process(ID,name){
+        
+        empleado[ID].status=name
+    }
+    function show(ID){
+        window.alert(empleado[ID].status)
+    }
+      const render_empleado = (empleado, index) => {
+        return(
+          <tr key={index}>
+            <td>{empleado.nombre}</td>
+            <td>{empleado.apellido}</td>
+            <td>{empleado.fecha}</td>
+            <td>{empleado.tipo}</td>
+            <td>{empleado.status}</td>
+            <td>
+                <button className="btn btn-success btn-circle btn-sm" onClick={process(empleado.ID, "Aprobado")}><i className="fas fa-check"></i></button>
+                <button className="btn btn-danger btn-circle btn-sm" onClick={process(empleado.ID, "Denegado")}><i className="fas fa-trash"></i></button> 
+            </td>
+          </tr>
+        )
+      }
     return(
         <div className="container-fluid">
 
@@ -10,47 +41,22 @@ function tablaSolicitudes(){
                             <h6 className="m-0 font-weight-bold text-primary">Autorizaciones pendientes</h6>
                         </div>
                         <div className="card-body">
-                            <div className="table-responsive">
-                                <table className="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <div className="App">
+                                <ReactBootStrap.Table striped bordered hover>
                                     <thead>
                                         <tr>
-                                            <th>Nombre</th>
-                                            <th>Identificación</th>
-                                            <th>Tipo de solicitud</th>
-                                            <th>Fecha de propuesta</th>
-                                            <th>Remunerado</th>
-                                            <th>Detalles</th>
-                                            <th>Aceptar/Rechazar</th>
+                                            <td>Nombre</td>
+                                            <td>Apellido</td>
+                                            <td>Fecha</td>
+                                            <td>Tipo</td>
+                                            <td>Status</td>
+                                            <td>Aceptar</td>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Nombre</th>
-                                            <th>Identificación</th>
-                                            <th>Tipo de solicitud</th>
-                                            <th>Fecha de propuesta</th>
-                                            <th>Remunerado</th>
-                                            <th>Detalles</th>
-                                            <th>Aceptar/Rechazar</th>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
-                                        <tr>
-                                            <td>xd</td>
-                                            <td>123456789</td>
-                                            <td>Vacaciones</td>
-                                            <td>11/11/2021</td>
-                                            <td>Si</td>
-                                            <td>...</td>
-                                            <td>
-                                                <a href="none" className="btn btn-success btn-circle btn-sm"><i className="fas fa-check"></i></a>
-                                                <a href="none" className="btn btn-danger btn-circle btn-sm"><i className="fas fa-trash"></i></a>    
-
-                                        </td>
-                                        </tr>
-                                        
+                                        {empleado.map(render_empleado)}
                                     </tbody>
-                                </table>
+                                </ReactBootStrap.Table>
                             </div>
                         </div>
                     </div>
@@ -61,5 +67,7 @@ function tablaSolicitudes(){
     );
 
 }
+
+
 
 export default tablaSolicitudes;
